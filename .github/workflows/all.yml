@@ -14,7 +14,7 @@ jobs:
         - uses: actions/checkout@main
           with:
             submodules: recursive
-        - run: sudo apt install emscripten
+        - run: sudo apt install emscripten bison # bison is for gawk
         - run: make test
 
     mac:
@@ -24,5 +24,5 @@ jobs:
         - uses: actions/checkout@main
           with:
             submodules: recursive
-        - run: brew install emscripten
+        - run: brew install emscripten bison
         - run: make test
