@@ -3,7 +3,8 @@ PWD=$(shell pwd)
 all: gawk.js
 
 clean:
-	rm -f gawk/gawk gawk.*
+	rm -f gawk.*
+	cd gawk && make clean
 
 gawk/Makefile:
 	cd gawk && emconfigure ./configure
