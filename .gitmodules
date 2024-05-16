@@ -1,0 +1,3 @@
+[submodule "gawk"]
+	path = gawk
+	url = git://git.savannah.gnu.org/gawk.git
