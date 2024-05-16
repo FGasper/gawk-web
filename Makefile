@@ -16,6 +16,7 @@ gawk.js: gawk/gawk
 	cp -f gawk/gawk ./gawk.js
 
 .PHONY: node-modules
+node-modules:
 	npm install
 
 .PHONY: test
