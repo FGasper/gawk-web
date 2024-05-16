@@ -22,6 +22,9 @@ The above tracks closely with typical command-line usage:
 
 ## Notes
 
+- Be sure to initialize the submodules (e.g., `git clone --recurse-submodules`)
+when cloning this repository.
+
 - This build optimizes for ease of use by packing the WebAssembly into the
 JavaScript file. You can shrink the output significantly by removing
 the `SINGLE_FILE` flag from the build (see the Makefile). You’ll need to
