@@ -12,6 +12,8 @@ jobs:
         steps:
         - run: node --version
         - uses: actions/checkout@main
+          with:
+            submodules: recursive
         - run: sudo apt install emscripten
         - run: make test
 
@@ -20,5 +22,7 @@ jobs:
         steps:
         - run: node --version
         - uses: actions/checkout@main
+          with:
+            submodules: recursive
         - run: brew install emscripten
         - run: make test
