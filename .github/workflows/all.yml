@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+  pull_request:
+
+jobs:
+    linux:
+        runs-on: ubuntu-latest
+        steps:
+        - run: node --version
+        - uses: actions/checkout@main
+        - run: sudo apt install emscripten
+        - run: make test
+
+    mac:
+        runs-on: macOS-latest
+        steps:
+        - run: node --version
+        - uses: actions/checkout@main
+        - run: brew install emscripten
+        - run: make test
