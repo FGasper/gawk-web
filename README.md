@@ -4,15 +4,12 @@ This package builds GNU AWK to WebAssembly and JavaScript via [Emscripten](https
 
 Usage:
 ```
-require('./gawk.js').then(
-    gawk => {
-        console.log( gawk.run(
-            ["foo bar baz", "1 2 3"].join("\n"),    // the text to process
-            "{print $2 $3}",                        // your AWK code
-        ) );
+const gawk = require('./gawk.js');
 
-        // Output is "barbaz\n23\n"
-    },
+// "barbaz\n23\n"
+const output = await gawk(
+    ["foo bar baz", "1 2 3"].join("\n"),    // the text to process
+    "{print $2 $3}",                        // your AWK code
 );
 ```
 The above tracks closely with typical command-line usage:
@@ -37,3 +34,8 @@ wherever your `gawk.js` runs.
 - GNU AWK’s build seems to give the LDFLAGS twice when building. For us that
 causes `pre.js` and friends to be included twice. To work around that, those
 files eschew root-level `let` and `const` in favor of `var`.
+
+- It’s pretty slow :( because GAWK’s `main()` doesn’t clean up after itself,
+so each run has to instantiate a separate WebAssembly instance. It could be
+optimized if someone were to figure out a way just to clear the WASM memory
+between runs rather than recompiling & rebuilding a whole new WASM.

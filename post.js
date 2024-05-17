@@ -30,7 +30,7 @@ function runGawk(inputstring, programText, flags) {
   }
 
   try {
-    exitCode = Module.callMain([programText, '/dev/stdin']); // induce c main open it
+    exitCode = Module.callMain(["--", programText, '/dev/stdin']); // induce c main open it
   } catch (e) {
     mainErr = e;
   }

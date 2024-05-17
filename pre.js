@@ -10,7 +10,9 @@ Module = Object.assign(
     noInitialRun: true,
     noExitRuntime: false,
     FS: FS,
-    preRun: function() {
+    preRun() {
+      ENV.TIDYMEM = 1;
+
       FS.init(
         function input() {
           if (!inBuffer && stdin) {
@@ -32,7 +34,7 @@ Module = Object.assign(
           if (c) errBuffer.push(c)
         }
       )
-    }
+    },
   },
   Module
 );

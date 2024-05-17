@@ -2,16 +2,16 @@
 
 const tape = require('tape');
 
-const gawkPromise = require('./gawk.js');
+const gawk = require('./gawk.js');
 
 tape('basics', async function(t) {
-    const gawk = await gawkPromise;
-
-    t.equals(
-        gawk.run(
+    const gawkResultP = gawk.run(
             "foo bar baz\n1 2 3\n",
             "{print $2 $3}",
-        ),
+        );
+
+    t.equals(
+        (await gawkResultP),
         "barbaz\n23\n",
     );
 });

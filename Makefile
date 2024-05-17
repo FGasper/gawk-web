@@ -6,7 +6,7 @@ clean:
 	rm -f gawk.*
 	cd gawk && make clean
 
-gawk/Makefile:
+gawk/Makefile: ./Makefile
 	cd gawk && emconfigure ./configure
 
 gawk/gawk: ./Makefile gawk/Makefile pre.js post.js extern-post.js
