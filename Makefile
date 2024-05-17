@@ -4,7 +4,7 @@ all: gawk.js
 
 clean:
 	rm -f gawk.*
-	cd gawk && make clean
+	cd gawk && emmake make clean
 
 gawk/Makefile: ./Makefile
 	cd gawk && emconfigure ./configure
