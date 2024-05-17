@@ -20,7 +20,7 @@ function runGawk(inputstring, programText, flags) {
 
   // Emscripten 3.1.31 neglects to free its argv, so we’ll do it here.
   // This should be safe to do even if Emscripten fixes that.
-  //const stackBefore = stackSave();
+  const stackBefore = stackSave();
 
   // Emscripten, as of 3.1.31, mucks with process.exitCode, which
   // makes no sense.
@@ -39,7 +39,7 @@ function runGawk(inputstring, programText, flags) {
     process.exitCode = preExitCode;
   }
 
-  //stackRestore(stackBefore);
+  stackRestore(stackBefore);
 
   // make sure closed & clean up fd
   if(FS.streams[1]) FS.close(FS.streams[1])
