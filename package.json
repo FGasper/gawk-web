@@ -1,5 +1,30 @@
 {
   "dependencies": {
     "tape": "^5.7.5"
-  }
+  },
+  "name": "gawk-web",
+  "description": "This package builds GNU AWK to WebAssembly and JavaScript via [Emscripten](https://emscripten.org/).",
+  "version": "0.0.1",
+  "main": "gawk.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FGasper/gawk-web.git"
+  },
+  "keywords": [
+    "gawk",
+    "awk",
+    "web",
+    "wasm",
+    "webassemly"
+  ],
+  "author": "Felipe Gasper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FGasper/gawk-web/issues"
+  },
+  "homepage": "https://github.com/FGasper/gawk-web#readme"
 }
