@@ -1,12 +1,29 @@
-if (typeof gawk === "function") {
+var wrappedGawk;
+
+if (!wrappedGawk) {
+    wrappedGawk = true;
+
     let origGawk = gawk;
 
-    gawk = {
-        async run(input, progText) {
-            const instance = await origGawk();
+    gawk = async () => {
+        const module = await origGawk();
 
-            return instance.run(input, progText);
-        },
+        let stableMemoryView;
+
+        return function(input, progText) {
+            if (!stableMemoryView) {
+                stableMemoryView = new Uint8Array(
+                    module.asm.memory.buffer.slice(),
+                );
+            }
+
+            const got = module.run(input, progText);
+
+            const postMemoryView = new Uint8Array(module.asm.memory.buffer);
+            postMemoryView.set(stableMemoryView);
+
+            return got;
+        };
     };
 
     if (typeof exports === 'object' && typeof module === 'object')

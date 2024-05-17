@@ -31,6 +31,7 @@ function runGawk(inputstring, programText, flags) {
 
   try {
     exitCode = Module.callMain(["--", programText, '/dev/stdin']); // induce c main open it
+    //exitCode = Module.callMain(["--pretty-print=/dev/stdout", "--", programText, '/dev/stdin']); // induce c main open it
   } catch (e) {
     mainErr = e;
   }
@@ -42,12 +43,14 @@ function runGawk(inputstring, programText, flags) {
   stackRestore(stackBefore);
 
   // make sure closed & clean up fd
+  if(FS.streams[0]) FS.close(FS.streams[0])
   if(FS.streams[1]) FS.close(FS.streams[1])
   if(FS.streams[2]) FS.close(FS.streams[2])
   if(FS.streams[3]) FS.close(FS.streams[3])
   if(FS.streams.length>3) FS.streams.pop()
 
   // calling main closes stdout, so we reopen it here:
+  FS.streams[0] = FS.open('/dev/stdin', "r")
   FS.streams[1] = FS.open('/dev/stdout', 577, 0)
   FS.streams[2] = FS.open('/dev/stderr', 577, 0)
 

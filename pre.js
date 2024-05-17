@@ -5,14 +5,12 @@ var errBuffer;
 
 var utf8Encoder = new TextEncoder();
 
-Module = Object.assign(
+Object.assign(
+  Module,
   {
     noInitialRun: true,
     noExitRuntime: false,
-    FS: FS,
     preRun() {
-      ENV.TIDYMEM = 1;
-
       FS.init(
         function input() {
           if (!inBuffer && stdin) {
@@ -27,14 +25,15 @@ Module = Object.assign(
 
           return null;
         },
+
         function output(c) {
-          if (c) outBuffer.push(c)
+          if (c) outBuffer.push(c);
         },
+
         function error(c) {
-          if (c) errBuffer.push(c)
-        }
-      )
+          if (c) errBuffer.push(c);
+        },
+      );
     },
   },
-  Module
 );
