@@ -24,5 +24,7 @@ jobs:
         - uses: actions/checkout@main
           with:
             submodules: recursive
-        - run: brew install emscripten bison # bison is for gawk
+        - run: brew install emscripten
+        - run: make
+        - run: cat gawk.js
         - run: make test
