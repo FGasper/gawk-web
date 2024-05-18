@@ -16,6 +16,10 @@ gawk().then( gawk => {
     );
 );
 ```
+Specifically: `require()` returns a single function. When called, that function
+compiles AWK and returns (via a promise) a function that actually runs AWK.
+You can call that function over & over.
+
 The above tracks closely with typical command-line usage:
 ```
 { echo foo bar baz; echo 1 2 3 } | awk '{print $2 $3}'
