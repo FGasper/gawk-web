@@ -10,6 +10,14 @@ Object.assign(
   {
     noInitialRun: true,
     noExitRuntime: false,
+
+    onRuntimeInitialized() {
+
+        // XXX This is brittle because it assumes the presence of a
+        // “wasmMemory” internal variable in the generated JS.
+        Module.wasmMemory = wasmMemory;
+    },
+
     preRun() {
       FS.init(
         function input() {

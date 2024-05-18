@@ -14,14 +14,12 @@ if (!wrappedGawk) {
         let stableMemoryView;
 
         return function(input, progText) {
-            const memoryView = new Uint8Array(module.asm.memory.buffer);
+            const memoryView = new Uint8Array(module.wasmMemory.buffer);
 
             if (stableMemoryView) {
                 memoryView.set(stableMemoryView);
             } else {
-                stableMemoryView = new Uint8Array(
-                    module.asm.memory.buffer.slice(),
-                );
+                stableMemoryView = memoryView.slice();
             }
 
             return module.run(input, progText);
