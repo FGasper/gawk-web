@@ -33,3 +33,25 @@ tape('repeat usage', async function(t) {
         );
     }
 });
+
+tape('failure', async function(t) {
+    const myGawk = await gawk();
+
+    t.throws(
+        () => myGawk("123", "{ foo"),
+        err => {
+            t.match(
+                err.stderr,
+                /unexpected newline or end of string/,
+                'stderr looks as we expect',
+            );
+
+            t.ok(err.exitCode);
+            t.notEqual(err.exitCode, 0);
+
+            return true;
+        },
+    );
+});
+
+

@@ -1,5 +1,3 @@
-var stdin = '';
-var inBuffer;
 var outBuffer;
 var errBuffer;
 
@@ -21,17 +19,7 @@ Object.assign(
     preRun() {
       FS.init(
         function input() {
-          if (!inBuffer && stdin) {
-            inBuffer = utf8Encoder.encode(stdin);
-          }
-
-          if (inBuffer && inBuffer.length) {
-            const thisByte = inBuffer[0];
-            inBuffer = new Uint8Array(inBuffer.buffer, inBuffer.byteOffset + 1);
-            return thisByte;
-          }
-
-          return null;
+            throw "should never read stdin";
         },
 
         function output(c) {
